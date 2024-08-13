@@ -1,27 +1,30 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import "./App.css";
 
 function App() {
   const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
-    const eventSource = new EventSource("https://xtimeline.onrender.com/api/tweets");
-    eventSource.onmessage = function (event) {
-      const newTweet = JSON.parse(event.data);
-      setTweets((prevTweets) => [newTweet, ...prevTweets]);
-    };
-
-    return () => {
-      eventSource.close();
-    };
+    axios
+      .get("https://xtimeline.onrender.com/api/tweets")
+      .then((response) => {
+        setTweets(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the tweets!", error);
+      });
   }, []);
 
   return (
-    <ul>
-      {tweets.map((tweet, index) => (
-        <li key={index}>{tweet.text}</li>
-      ))}
-    </ul>
+    <div className="App">
+      <h1>Recent Tweets</h1>
+      <ul>
+        {tweets.map((tweet, index) => (
+          <li key={index}>{tweet.text}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
