@@ -21,7 +21,7 @@ function App() {
       <h1>Recent Tweets</h1>
       <ul>
         {tweets.map((tweet, index) => (
-          <li key={index}>{tweet.text}</li>
+          <li key={index}>{tweet.content}</li>
         ))}
       </ul>
     </div>
