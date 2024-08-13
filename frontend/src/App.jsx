@@ -18,10 +18,12 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Recent Tweets</h1>
+      <h1>#ZeroPlus の投稿</h1>
       <ul>
         {tweets.map((tweet, index) => (
-          <li key={index}>{tweet.content}</li>
+          <li key={index}>
+            <a href={tweet.link}>{tweet.content}</a>
+          </li>
         ))}
       </ul>
     </div>
