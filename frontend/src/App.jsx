@@ -5,7 +5,7 @@ function App() {
   const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
-    const eventSource = new EventSource("http://yourdomain.com/api/tweets");
+    const eventSource = new EventSource("https://xtimeline.onrender.com/api/tweets");
     eventSource.onmessage = function (event) {
       const newTweet = JSON.parse(event.data);
       setTweets((prevTweets) => [newTweet, ...prevTweets]);
