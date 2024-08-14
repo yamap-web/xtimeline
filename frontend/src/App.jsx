@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
+import { Card } from "react-bootstrap";
 import axios from "axios";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
     axios
-      .get("https://xtimeline.onrender.com/api/tweets")
+      .get("https://xtimeline.onrendar.com/api/tweets")
       .then((response) => {
         setTweets(response.data);
       })
@@ -18,14 +20,17 @@ function App() {
 
   return (
     <div className="App">
-      <h1>#ZeroPlus の投稿</h1>
-      <ul>
+      <h1 className="fw-bold">#ZeroPlus</h1>
+      <div className="d-flex flex-column gap-2 mt-4">
         {tweets.map((tweet, index) => (
-          <li key={index}>
-            <a href={tweet.link}>{tweet.content}</a>
-          </li>
+          <Card style={{ width: "18rem" }} key={index}>
+            <Card.Body>
+              <Card.Text>{tweet.content}</Card.Text>
+              <Card.Link href={tweet.link}>Link to Tweet</Card.Link>
+            </Card.Body>
+          </Card>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
