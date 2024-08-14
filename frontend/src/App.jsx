@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("https://xtimeline.onrendar.com/api/tweets")
+      .get("https://xtimeline.onrender.com/api/tweets")
       .then((response) => {
         setTweets(response.data);
       })
